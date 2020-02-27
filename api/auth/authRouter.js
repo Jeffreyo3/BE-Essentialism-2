@@ -91,7 +91,7 @@ function getToken(user) {
         author: "Created by Jeffrey Orndorff"
     };
     const options = { expiresIn: "3h" };
-    const token = jwt.sign(tokenPayload, process.env.secret, options);
+    const token = jwt.sign(tokenPayload, process.env.SECRET, options);
 
     return token;
 }
