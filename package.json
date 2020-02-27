@@ -1,0 +1,43 @@
+{
+  "name": "essentialism",
+  "version": "1.0.0",
+  "description": "NodeJS backend for Essentialism",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "scripts": {
+    "test": "cross-env DB_ENV=test jest --watch",
+    "server": "cross-env NODE_ENV=development nodemon index.js",
+    "start": "node index.js"
+  },
+  "keywords": [
+    "nodejs",
+    "sqlite3",
+    "jest",
+    "testing"
+  ],
+  "author": "Jeffrey Orndorff",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^4.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "helmet": "^3.21.3",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.20.10",
+    "morgan": "^1.9.1",
+    "sqlite3": "^4.1.1"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.0",
+    "jest": "^25.1.0",
+    "nodemon": "^2.0.2",
+    "supertest": "^4.0.2"
+  }
+}
