@@ -4,6 +4,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 
 const authRouter = require('./auth/authRouter');
+const valueRouter = require('./values/valueRouter');
 
 const server = express();
 
@@ -14,6 +15,7 @@ server.use(express.json());
 
 // Routes
 server.use('/api/auth', authRouter);
+server.use('/api/values', valueRouter);
 
 // Alive messages
 server.get('/', (req, res) => {

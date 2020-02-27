@@ -34,3 +34,8 @@ POST: `/api/auth/login`
     "password": "verysecretpass"
 }
 ```
+
+# Data
+List of values is not protected. </br>
+GET: `/api/values` </br>
+will return an array of values
