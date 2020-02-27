@@ -2,11 +2,6 @@ const router = require('express').Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-// Import secret to use for JWT
-// const secret = require('../../config/secret.js')
-
-// User must create a config folder containing a file
-// secrets.js must contain the secret
 
 const User = require('../../models/authModel');
 
@@ -91,6 +86,7 @@ function getToken(user) {
         author: "Created by Jeffrey Orndorff"
     };
     const options = { expiresIn: "3h" };
+    // root directory needs a .env file with a key of SECRET for this function to work.
     const token = jwt.sign(tokenPayload, process.env.SECRET, options);
 
     return token;
