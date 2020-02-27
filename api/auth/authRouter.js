@@ -3,7 +3,8 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 // Import secret to use for JWT
-const secret = require('../../config/secret.js')
+// const secret = require('../../config/secret.js')
+
 // User must create a config folder containing a file
 // secrets.js must contain the secret
 
@@ -90,7 +91,7 @@ function getToken(user) {
         author: "Created by Jeffrey Orndorff"
     };
     const options = { expiresIn: "3h" };
-    const token = jwt.sign(tokenPayload, secret, options);
+    const token = jwt.sign(tokenPayload, process.env.secret, options);
 
     return token;
 }

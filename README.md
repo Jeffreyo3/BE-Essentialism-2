@@ -1,6 +1,8 @@
 # ESSENTIALISM API
 
 ## Endpoints
+`https://essentialism-be-api.herokuapp.com/`
+
 #### Server Status
 GET: `/` </br>
 When active, will respond with: 
