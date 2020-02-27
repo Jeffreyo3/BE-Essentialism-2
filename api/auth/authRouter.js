@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 // Import secret to use for JWT
 const secret = require('../../config/secret.js')
 // User must create a config folder containing a file
-// secrets.js must contain an object with the secret key titled jwtSecret
+// secrets.js must contain the secret
 
 const User = require('../../models/authModel');
 
@@ -90,7 +90,7 @@ function getToken(user) {
         author: "Created by Jeffrey Orndorff"
     };
     const options = { expiresIn: "3h" };
-    const token = jwt.sign(tokenPayload, secret.jwtSecret, options);
+    const token = jwt.sign(tokenPayload, secret, options);
 
     return token;
 }
