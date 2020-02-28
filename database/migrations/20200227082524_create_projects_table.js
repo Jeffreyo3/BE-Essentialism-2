@@ -6,6 +6,7 @@ exports.up = function (knex) {
             tbl.increments();
             tbl.string('project')
                 .notNullable();
+            tbl.string('notes');
             tbl.boolean('completed')
                 .notNullable()
                 .defaultTo(false);
@@ -14,9 +15,9 @@ exports.up = function (knex) {
                 .inTable('users')
                 .onDelete('CASCADE')
                 .onUpdate('CASCADE');
-            tbl.integer('user_value_id')
+            tbl.integer('value_id')
                 .references('id')
-                .inTable('user_values')
+                .inTable('values')
                 .onDelete('CASCADE')
                 .onUpdate('CASCADE');
         })
