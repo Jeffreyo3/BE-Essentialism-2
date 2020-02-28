@@ -4,7 +4,6 @@ exports.up = function (knex) {
 
         // Tbl of User's Values
         knex.schema.createTable('user_values', tbl => {
-            tbl.increments();
             tbl.boolean('important')
                 .notNullable()
                 .defaultTo(false);
@@ -19,6 +18,7 @@ exports.up = function (knex) {
                 .inTable('users')
                 .onDelete('CASCADE')
                 .onUpdate('CASCADE');
+            tbl.primary(['value_id', 'user_id']);
         })
     )
 };
