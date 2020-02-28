@@ -4,6 +4,7 @@ exports.up = function (knex) {
 
         // Tbl of User's Values
         knex.schema.createTable('user_values', tbl => {
+            // tbl.increments();
             tbl.boolean('important')
                 .notNullable()
                 .defaultTo(false);
