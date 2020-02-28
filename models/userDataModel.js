@@ -3,8 +3,9 @@ const db = require('../database/dbConfig');
 module.exports = {
     getUserValues,
     getUserProjects,
-    addUserValues,
-    getImportantValue
+    addUserValues
+    // ,
+    // getImportantValue
 }
 
 // Return a list values that belong to the user.
