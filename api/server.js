@@ -3,7 +3,10 @@ const helmet = require('helmet');
 const cors = require('cors');
 const morgan = require('morgan');
 
+const authenticate = require('./auth/authenticate-middlware');
 const authRouter = require('./auth/authRouter');
+const valueRouter = require('./values/valueRouter');
+const userDataRouter = require('./userData/userDataRouter')
 
 const server = express();
 
@@ -14,6 +17,8 @@ server.use(express.json());
 
 // Routes
 server.use('/api/auth', authRouter);
+server.use('/api/values', valueRouter);
+server.use('/api/user', authenticate, userDataRouter);
 
 // Alive messages
 server.get('/', (req, res) => {
