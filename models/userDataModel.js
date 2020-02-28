@@ -3,7 +3,8 @@ const db = require('../database/dbConfig');
 module.exports = {
     getUserValues,
     getUserProjects,
-    addUserValues
+    addUserValues,
+    updateUserValues
     // ,
     // getImportantValue
 }
@@ -51,4 +52,11 @@ function getUserProjects(user_id) {
 
 function addUserValues(value) {
     return db('user_values').insert(value)
+}
+
+function updateUserValues(value, user_id, value_id) {
+    return db('user_values')
+        .where({value_id})
+        .where({user_id})
+        .update(value)
 }
