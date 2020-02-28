@@ -22,7 +22,7 @@ router.get('/:id/values', (req, res) => {
 })
 
 router.post('/:id/values', (req, res) => {
-    if (!req.body || !req.body.important || !req.body.id) {
+    if (!req.body || !req.body.important && !!req.body.important || !req.body.id) {
         res.status(400).json({ message: "Please make sure to fill out all mandatory fields." });
     } else {
 
@@ -35,7 +35,7 @@ router.post('/:id/values', (req, res) => {
 
         UserData.addUserValues(insertValue)
             .then(value => {
-                res.status(201).json({ ...insertValue })
+                res.status(201).json({ ...insertValue, important: insertValue.important === 1 ? true : false })
             })
             .catch(err => {
                 if (err.message.includes('UNIQUE constraint failed')) {
@@ -43,6 +43,28 @@ router.post('/:id/values', (req, res) => {
                 } else {
                     res.status(500).json({ error: `Error adding adding User's values: ${err.message}` })
                 }
+            })
+    }
+})
+
+router.put('/:id/values', (req, res) => {
+    if (!req.body || !req.body.important && !!req.body.important || !req.body.id) {
+        res.status(400).json({ message: "Please make sure to include all mandatory fields." });
+    } else {
+
+        const insertValue = {
+            user_id: req.params.id,
+            important: req.body.important === true ? 1 : 0,
+            comment: req.body.comment || null,
+            value_id: req.body.id
+        }
+
+        UserData.updateUserValues(insertValue, req.params.id, req.body.id)
+            .then(value => {
+                res.status(201).json({ ...insertValue, important: insertValue.important === 1 ? true : false })
+            })
+            .catch(err => {
+                res.status(500).json({ error: `Error adding updating User's values: ${err}` })
             })
     }
 })
@@ -73,7 +95,7 @@ router.get('/:id/projects', (req, res) => {
         .then(project => {
             // console.log(project)
             UserData.getImportantValue(project)
-                .then(project => { res.status(200).json(project)})
+                .then(project => { res.status(200).json(project) })
                 .catch(err => {
                     res.status(500).json({ error: `Error attempting to get projects with important val: ${err.message}` })
                 })

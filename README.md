@@ -78,7 +78,18 @@ Will take in a single Values object and apply it to the user ID specified in the
 ```
 {
     "id": int, (id of the Value)
-    "important": boolean,
+    "important": boolean, (if no value is included, db will default to false)
+    "comment": string (optional/can be null)
+}
+```
+
+
+PUT: `/api/user/:id/values` </br>
+Will take in a single Values object and apply it to the user ID specified in the `:id` portion of the endpoint</br>
+```
+{
+    "id": int, (id of the Value)
+    "important": boolean, (if no value is included, db will default to false)
     "comment": string (optional/can be null)
 }
 ```
