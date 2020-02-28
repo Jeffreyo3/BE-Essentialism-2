@@ -20,6 +20,11 @@ exports.up = function (knex) {
                 .inTable('values')
                 .onDelete('CASCADE')
                 .onUpdate('CASCADE');
+            // tbl.integer('user_value_id')
+            //     .references('id')
+            //     .inTable('user_values')
+            //     .onDelete('CASCADE')
+            //     .onUpdate('CASCADE')
         })
 
     );
