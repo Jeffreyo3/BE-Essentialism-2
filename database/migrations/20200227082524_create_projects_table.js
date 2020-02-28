@@ -6,7 +6,9 @@ exports.up = function (knex) {
             tbl.increments();
             tbl.string('project')
                 .notNullable();
-            tbl.boolean('completed');
+            tbl.boolean('completed')
+                .notNullable()
+                .defaultTo(false);
             tbl.integer('user_id')
                 .references('id')
                 .inTable('users')
