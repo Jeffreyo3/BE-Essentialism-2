@@ -26,40 +26,57 @@ router.post('/:id/values', (req, res) => {
         res.status(400).json({ message: "Please make sure to fill out all mandatory fields." });
     } else {
 
-    const insertValue = {
-        user_id: req.params.id,
-        important: req.body.important === true ? 1 : 0,
-        comment: req.body.comment || null,
-        value_id: req.body.id
-    }
+        const insertValue = {
+            user_id: req.params.id,
+            important: req.body.important === true ? 1 : 0,
+            comment: req.body.comment || null,
+            value_id: req.body.id
+        }
 
-    UserData.addUserValues(insertValue)
-        .then(value => {
-            res.status(201).json({...insertValue})
-        })
-        .catch(err => {
-            if (err.message.includes('UNIQUE constraint failed')) {
-                res.status(500).json({ error: `This user has already selected this value. Please use update instead of submit.` })
-            } else {
-                res.status(500).json({ error: `Error adding adding User's values: ${err.message}` })
-            }
-        })
+        UserData.addUserValues(insertValue)
+            .then(value => {
+                res.status(201).json({ ...insertValue })
+            })
+            .catch(err => {
+                if (err.message.includes('UNIQUE constraint failed')) {
+                    res.status(500).json({ error: `This user has already selected this value. Please use update instead of submit.` })
+                } else {
+                    res.status(500).json({ error: `Error adding adding User's values: ${err.message}` })
+                }
+            })
     }
 })
 
 
+// router.get('/:id/projects', (req, res) => {
+//     const { id } = req.params;
+//     UserData.getUserProjects(id)
+//         .then(list => {
+//             const convertedList = list.map(item => {
+//                 if (item.completed === 1) {
+//                     return { ...item, completed: true }
+//                 } else {
+//                     return { ...item, completed: false }
+//                 }
+//             })
+//             res.status(201).json(convertedList);
+//         })
+//         .catch(err => {
+//             res.status(500).json({ error: `Error attempting to get projects: ${err.message}` })
+//         })
+// })
+
 router.get('/:id/projects', (req, res) => {
     const { id } = req.params;
+
     UserData.getUserProjects(id)
-        .then(list => {
-            const convertedList = list.map(item => {
-                if (item.completed === 1) {
-                    return { ...item, completed: true }
-                } else {
-                    return { ...item, completed: false }
-                }
-            })
-            res.status(201).json(convertedList);
+        .then(project => {
+            // console.log(project)
+            UserData.getImportantValue(project)
+                .then(project => { res.status(200).json(project)})
+                .catch(err => {
+                    res.status(500).json({ error: `Error attempting to get projects with important val: ${err.message}` })
+                })
         })
         .catch(err => {
             res.status(500).json({ error: `Error attempting to get projects: ${err.message}` })
