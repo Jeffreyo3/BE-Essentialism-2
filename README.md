@@ -63,33 +63,128 @@ Will return an array of values given a user's ID
 [
     {
     "id": int,
-    "project_id": int,
     "value_id": int,
-    "project": string,
-    "notes" : string (optional/can be null),
-    "completed": boolean,
+    "value": string,
+    "important": boolean, 
     "comment": string (optional/can be null)
     }
 ]
 ```
-
+</br>
 POST: `/api/user/:id/values` </br>
 Will take in a single Values object and apply it to the user ID specified in the `:id` portion of the endpoint</br>
+
 ```
 {
-    "id": int, (id of the Value)
+    "value_id": int, (id of the Value)
     "important": boolean, (if no value is included, db will default to false)
-    "comment": string (optional/can be null)
+    "comment": string || null
 }
 ```
 
-
+Will return:
+```
+{
+    "user_id": int,
+    "important": boolean,
+    "comment": string || null,
+    "value_id": int
+}
+```
+</br>
 PUT: `/api/user/:id/values` </br>
 Will take in a single Values object and apply it to the user ID specified in the `:id` portion of the endpoint</br>
+
 ```
 {
-    "id": int, (id of the Value)
+    "value_id": int, (id of the Value)
     "important": boolean, (if no value is included, db will default to false)
     "comment": string (optional/can be null)
 }
 ```
+Will return:
+```
+{
+    "user_id": int,
+    "important": boolean,
+    "comment": string || null,
+    "value_id": int
+}
+```
+</br>
+
+DELETE: `/api/user/:id/values`</br>
+Not setup/not needed at this time
+
+</br></br>
+#### User's Projects
+GET: `/api/user/:id/projects` </br>
+Will return an array of projects given a user's ID
+```
+[
+    {
+    "id": int,
+    "project_id": int,
+    "project": string,
+    "notes": string || null,
+    "completed": boolean,
+    "value_id": string
+    }
+]
+```
+</br>
+
+POST: `/api/user/:id/projects` </br>
+Will take in a single Projects object and apply it to the user ID specifed in the `:id` portion of the endpoint</br>
+```
+{
+    "value_id": int, (required)
+    "project": string, (required)
+    "notes": string, (optional/can be null)
+    "completed": boolean (optional & default is false)
+}
+```
+</br>
+Will return:
+
+```
+{
+    "user_id": int,
+    "project": string,
+    "notes": string || null,
+    "completed": boolean,
+    "project_id": int,
+    "value_id": int
+}
+```
+</br>
+
+PUT: `/api/user/:id/projects/:project_id` </br>
+Will take in a single Projects to update</br>
+User id is specified in the `:id` portion of the endpoint</br>
+Project id is specified in the `:project_id` portion of the endpoint</br>
+```
+{
+    "value_id": int, (required)
+    "project": string, (required)
+    "notes": string, (optional/can be null)
+    "completed": boolean (optional & default is false)
+}
+```
+</br>
+Will return:
+
+```
+{
+    "user_id": int,
+    "project_id": int,
+    "project": string,
+    "notes": string || null,
+    "completed": boolean,
+    "value_id": int
+}
+```
+</br>
+
+DELETE: `/api/user/:id/projects/:project_id` </br>
+  Work in progress 
