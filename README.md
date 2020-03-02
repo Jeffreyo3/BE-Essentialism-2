@@ -13,8 +13,8 @@ ESSENTIALISM server is alive
 
 - [Install](#install)
 - [Authentication](#authentication)
-    - [Register](#register-a-user)
-    - [Login](#login-with-a-registered-user)
+    - [Register](#register-a-user) (POST)
+    - [Login](#login-with-a-registered-user) (POST)
 - [Data](#data)
     - [Values](#values) (GET)
 - [Protected Data](#protected-data)
