@@ -2,6 +2,8 @@ const router = require('express').Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+// root directory needs a .env file with a key of SECRET for this function to work.
+const secret = process.env.SECRET;
 
 const User = require('../../models/authModel');
 
@@ -86,8 +88,8 @@ function getToken(user) {
         author: "Created by Jeffrey Orndorff"
     };
     const options = { expiresIn: "3h" };
-    // root directory needs a .env file with a key of SECRET for this function to work.
-    const token = jwt.sign(tokenPayload, process.env.SECRET, options);
+    
+    const token = jwt.sign(tokenPayload, secret, options);
 
     return token;
 }
