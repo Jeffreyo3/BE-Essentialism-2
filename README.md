@@ -65,18 +65,15 @@ Will return an array of values</br>
 [
     {
     "id": int,
-    "user_value_id": int,
-    "value_id": int,
-    "value": string,
-    "important": boolean,
-    "comment": string (can be null)
+    "value": string
     }
 ]
 ```
 
 
 # Protected Data
-Protected Data requires login credentials </br></br>
+Protected Data requires Authorization obtained upon register/login </br>
+Authorization must be included in the header of all requests for the below endpoints</br></br>
 
 #### User's Values
 GET: `/api/user/:id/values` </br>
