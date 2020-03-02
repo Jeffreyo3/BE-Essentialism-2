@@ -1,6 +1,6 @@
 # ESSENTIALISM API
 
-## Endpoints
+## API Base URL
 `https://essentialism-be-api.herokuapp.com/`
 
 #### Server Status
@@ -8,6 +8,20 @@ GET: `/` </br>
 When active, will respond with: 
 ```
 ESSENTIALISM server is alive
+```
+## Table of Contents
+
+- [Install](#install)
+- [Authentication](#authentication)
+- [Data](#data)
+- [Protected Data](#protected-data)
+- [Database Schema](#database-schema)
+- [License](#license)
+
+## Install
+
+```
+npm install
 ```
 
 # Authentication
@@ -214,3 +228,11 @@ Will return:
             or
 "Failed to delete project"
 ```
+
+### Database Schema
+
+![logo](./db-schema.png )
+
+#### License
+
+MIT © 2020 Essentialism
