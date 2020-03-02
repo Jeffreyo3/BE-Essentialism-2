@@ -240,7 +240,7 @@ Will return:
 
 ### Database Schema
 
-![logo](./db-schema.png )
+![logo](./database-schema.png )
 
 #### License
 
