@@ -16,8 +16,8 @@ Authentication expires in: `3 hours`
 #### Register a user
 
 Usernames *MUST* be unique. </br>
-Registering an existing user will give a response
-{ error: "Username already registered" }</br>
+Registering an existing user will give a response:
+`{ error: "Username already registered" }`</br>
 POST: `/api/auth/register`
 ```
 {
