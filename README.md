@@ -26,12 +26,34 @@ POST: `/api/auth/register`
 }
 ```
 
+Will return:
+```
+{
+    "user": {
+        "id": int,
+        "username": string
+    },
+    "token": string
+}
+```
+
 #### Login with a registered user
 POST: `/api/auth/login`
 ```
 {
     "username": "myuser",
     "password": "verysecretpass"
+}
+```
+
+Will return:
+```
+{
+    "user": {
+        "id": int,
+        "username": string
+    },
+    "token": string
 }
 ```
 
