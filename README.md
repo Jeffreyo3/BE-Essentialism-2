@@ -13,8 +13,13 @@ ESSENTIALISM server is alive
 
 - [Install](#install)
 - [Authentication](#authentication)
+    - [Register](#register-a-user)
+    - [Login](#login-with-a-registered-user)
 - [Data](#data)
+    - [Values](#values) (GET)
 - [Protected Data](#protected-data)
+    - [User's Values](#users-values) (GET, POST, PUT)
+    - [User's Projects](#users-projects) (GET, POST, PUT, DELETE)
 - [Database Schema](#database-schema)
 - [License](#license)
 
@@ -72,7 +77,9 @@ Will return:
 ```
 
 # Data
-List of values is not protected. </br></br>
+Data does NOT require Authorization. </br></br>
+
+#### Values
 GET: `/api/values`</br>
 Will return an array of values</br>
 ```
@@ -104,6 +111,7 @@ Will return an array of values given a user's ID
 ]
 ```
 </br>
+
 POST: `/api/user/:id/values` </br>
 Will take in a single Values object and apply it to the user ID specified in the `:id` portion of the endpoint</br>
 
@@ -125,6 +133,7 @@ Will return:
 }
 ```
 </br>
+
 PUT: `/api/user/:id/values` </br>
 Will take in a single Values object and apply it to the user ID specified in the `:id` portion of the endpoint</br>
 
