@@ -53,11 +53,9 @@ function updateUserProject(project, id) {
         .update(project)
 }
 
-function removeUserProject(user_id, id) {
+function removeUserProject(id) {
     return db('projects')
-        .where({user_id})
-        .where({id})
-        
+        .where({id: id})
         .del();
 }
 

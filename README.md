@@ -186,5 +186,12 @@ Will return:
 ```
 </br>
 
-DELETE: `/api/user/:id/projects/:project_id` </br>
-  Work in progress 
+DELETE: `/api/user/projects/:project_id` </br>
+_No body is required for DELETE method._</br>
+Include the appropriate Project's ID in the endpoint where `:project_id` slug is listed.</br>
+Will return:
+```
+"Successfully deleted project"
+            or
+"Failed to delete project"
+```

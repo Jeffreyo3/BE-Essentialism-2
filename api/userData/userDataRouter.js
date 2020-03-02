@@ -153,12 +153,13 @@ router.put('/:id/projects/:project_id', (req, res) => {
     }
 })
 
-router.delete('/id:/projects/:project_id', (req, res) => {
-        const {id, project_id} = req.params
+router.delete('/projects/:project_id', (req, res) => {
+        const {project_id} = req.params
         
-        UserData.removeUserProject(id, project_id)
+        UserData.removeUserProject(project_id)
             .then(project => {
-                res.status(202).json(project)
+                const deleteStatus = project === 1 ? "Successfully deleted project" : "Failed to delete project"
+                res.status(202).json(deleteStatus)
             })
             .catch(err => {
                 res.status(500).json({ error: `Error attempting to delete User's projects: ${err.message}` })
