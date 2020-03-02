@@ -34,7 +34,7 @@ exports.seed = function (knex) {
             project: "Make a card for the wife",
             notes: null,
             completed: true,
-            user_id: 22,
+            user_id: 2,
             value_id: 10
         },
     ])
