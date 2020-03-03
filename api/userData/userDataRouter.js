@@ -14,7 +14,7 @@ router.get('/:id/values', (req, res) => {
                     return { ...item, important: false }
                 }
             })
-            res.status(201).json(convertedList);
+            res.status(200).json(convertedList);
         })
         .catch(err => {
             res.status(500).json({ error: `Error attempting to get values: ${err.message}` })
@@ -64,7 +64,7 @@ router.put('/:id/values', (req, res) => {
                 res.status(200).json({ ...insertValue, important: insertValue.important === 1 ? true : false })
             })
             .catch(err => {
-                res.status(500).json({ error: `Error adding updating User's values: ${err}` })
+                res.status(500).json({ error: `Error updating User's values: ${err}` })
             })
     }
 })
@@ -105,7 +105,7 @@ router.post('/:id/projects', (req, res) => {
 
         UserData.addUserProject(insertProject)
             .then(project => {
-                console.log(project)
+                // console.log(project)
                 res.status(201).json({
                     user_id: project.user_id,
                     project: project.project,

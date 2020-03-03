@@ -1,24 +1,43 @@
 # ESSENTIALISM API
 
-## Endpoints
+## API Base URL
 `https://essentialism-be-api.herokuapp.com/`
 
 #### Server Status
-GET: `/` </br>
+**GET**: `/` </br>
 When active, will respond with: 
 ```
 ESSENTIALISM server is alive
+```
+## Table of Contents
+
+- [Install](#install)
+- [Authentication](#authentication)
+    - [Register](#register-a-user) (POST)
+    - [Login](#login-with-a-registered-user) (POST)
+- [Data](#data)
+    - [Values](#values) (GET)
+- [Protected Data](#protected-data)
+    - [User's Values](#users-values) (GET, POST, PUT)
+    - [User's Projects](#users-projects) (GET, POST, PUT, DELETE)
+- [Database Schema](#database-schema)
+- [License](#license)
+
+## Install
+
+```
+npm install
 ```
 
 # Authentication
 Authentication expires in: `3 hours`
 
-#### Register a user
+### Register a user
 
 Usernames *MUST* be unique. </br>
-Registering an existing user will give a response
-{ error: "Username already registered" }</br>
-POST: `/api/auth/register`
+Registering an existing user will give a response:
+`{ error: "Username already registered" }`</br></br>
+**POST**: `/api/auth/register`
 ```
 {
     "username": "myuser",
@@ -26,38 +45,59 @@ POST: `/api/auth/register`
 }
 ```
 
-#### Login with a registered user
-POST: `/api/auth/login`
+Will return:
+```
+{
+    "user": {
+        "id": int,
+        "username": string
+    },
+    "token": string
+}
+```
+
+### Login with a registered user
+**POST**: `/api/auth/login`
 ```
 {
     "username": "myuser",
     "password": "verysecretpass"
+}
+```
+
+Will return:
+```
+{
+    "user": {
+        "id": int,
+        "username": string
+    },
+    "token": string
 }
 ```
 
 # Data
-List of values is not protected. </br></br>
-GET: `/api/values`</br>
+Data does NOT require Authorization. </br></br>
+
+### Values
+**GET**: `/api/values`</br>
 Will return an array of values</br>
 ```
 [
     {
     "id": int,
-    "user_value_id": int,
-    "value_id": int,
-    "value": string,
-    "important": boolean,
-    "comment": string (can be null)
+    "value": string
     }
 ]
 ```
 
 
 # Protected Data
-Protected Data requires login credentials </br></br>
+Protected Data requires Authorization obtained upon register/login </br>
+Authorization must be included in the header of all requests for the below endpoints</br></br>
 
-#### User's Values
-GET: `/api/user/:id/values` </br>
+### User's Values
+**GET**: `/api/user/:id/values` </br>
 Will return an array of values given a user's ID
 ```
 [
@@ -71,7 +111,8 @@ Will return an array of values given a user's ID
 ]
 ```
 </br>
-POST: `/api/user/:id/values` </br>
+
+**POST**: `/api/user/:id/values` </br>
 Will take in a single Values object and apply it to the user ID specified in the `:id` portion of the endpoint</br>
 
 ```
@@ -92,7 +133,8 @@ Will return:
 }
 ```
 </br>
-PUT: `/api/user/:id/values` </br>
+
+**PUT**: `/api/user/:id/values` </br>
 Will take in a single Values object and apply it to the user ID specified in the `:id` portion of the endpoint</br>
 
 ```
@@ -113,12 +155,12 @@ Will return:
 ```
 </br>
 
-DELETE: `/api/user/:id/values`</br>
+**DELETE**: `/api/user/:id/values`</br>
 Not setup/not needed at this time
 
 </br></br>
-#### User's Projects
-GET: `/api/user/:id/projects` </br>
+### User's Projects
+**GET**: `/api/user/:id/projects` </br>
 Will return an array of projects given a user's ID
 ```
 [
@@ -134,7 +176,7 @@ Will return an array of projects given a user's ID
 ```
 </br>
 
-POST: `/api/user/:id/projects` </br>
+**POST**: `/api/user/:id/projects` </br>
 Will take in a single Projects object and apply it to the user ID specifed in the `:id` portion of the endpoint</br>
 ```
 {
@@ -159,7 +201,7 @@ Will return:
 ```
 </br>
 
-PUT: `/api/user/:id/projects/:project_id` </br>
+**PUT**: `/api/user/:id/projects/:project_id` </br>
 Will take in a single Projects to update</br>
 User id is specified in the `:id` portion of the endpoint</br>
 Project id is specified in the `:project_id` portion of the endpoint</br>
@@ -186,7 +228,7 @@ Will return:
 ```
 </br>
 
-DELETE: `/api/user/projects/:project_id` </br>
+**DELETE**: `/api/user/projects/:project_id` </br>
 _No body is required for DELETE method._</br>
 Include the appropriate Project's ID in the endpoint where `:project_id` slug is listed.</br>
 Will return:
@@ -195,3 +237,11 @@ Will return:
             or
 "Failed to delete project"
 ```
+
+### Database Schema
+
+![logo](./database-schema.png )
+
+#### License
+
+MIT © 2020 Essentialism
