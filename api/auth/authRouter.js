@@ -99,7 +99,7 @@ function getToken(user) {
 function addValues(user_id) {
     Values.getValues()
         .then(res => {
-            console.log(res)
+            // console.log(res)
             res.forEach(item => {
                 const insertValue = {
                     user_id: user_id,
