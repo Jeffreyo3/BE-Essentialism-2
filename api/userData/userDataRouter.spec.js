@@ -41,33 +41,33 @@ describe("userDataRouter GET at /:id/values", () => {
 
 })
 
-describe("userDataRouter POST at /:id/values", () => {
+// describe("userDataRouter POST at /:id/values", () => {
 
-    test("POST user values fails without auth with status of 401", async () => {
-        let res = await request(server)
-            .post('/api/user/1/values')
-            .send({ value_id: 1 })
+//     test("POST user values fails without auth with status of 401", async () => {
+//         let res = await request(server)
+//             .post('/api/user/1/values')
+//             .send({ value_id: 1 })
 
-        expect(res.status).toBe(401);
-    })
+//         expect(res.status).toBe(401);
+//     })
 
-    test("User values POST will return a 400 if value_id is not included", async () => {
-        let res = await request(server)
-            .post('/api/user/0/values')
-            .set('Authorization', token)
-            .send({})
+//     test("User values POST will return a 400 if value_id is not included", async () => {
+//         let res = await request(server)
+//             .post('/api/user/0/values')
+//             .set('Authorization', token)
+//             .send({})
 
-        expect(res.status).toBe(400);
-    })
+//         expect(res.status).toBe(400);
+//     })
 
-    test("User values will return a 500 if unique data is already in database", async () => {
-        let res = await request(server)
-            .post('/api/user/1/values')
-            .set('Authorization', token)
-            .send({ value_id: 1 })
+//     test("User values will return a 500 if unique data is already in database", async () => {
+//         let res = await request(server)
+//             .post('/api/user/1/values')
+//             .set('Authorization', token)
+//             .send({ value_id: 1 })
 
-        expect(res.status).toBe(500);
-    })
+//         expect(res.status).toBe(500);
+//     })
 
     test("User values will return a 201 to successfully insert to user_values", async () => {
         let res = await request(server)

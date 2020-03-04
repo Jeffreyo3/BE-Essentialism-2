@@ -17,7 +17,7 @@ function getUserValues(user_id) {
         .join('user_values as uv', 'v.id', 'uv.value_id')
         .join('users as u', 'uv.user_id', 'u.id')
         .where({ user_id })
-        .select('uv.user_id as id',  'uv.value_id', 'v.value', 'uv.important', 'uv.comment')
+        .select('uv.user_id as id',  'uv.value_id', 'v.value', 'uv.important', 'uv.comment', 'uv.top3')
 }
 
 function addUserValue(value) {
