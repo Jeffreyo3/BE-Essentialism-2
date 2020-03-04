@@ -8,15 +8,15 @@ router.get('/:id/values', (req, res) => {
     UserData.getUserValues(id)
         .then(list => {
             const convertedList = list.map(item => {
+                let thing = { ...item }
                 if (item.important === 1) {
-                    return { ...item, important: true, top3: false }
-                } else if (item.top3 === 1) {
-                    return { ...item, important: false, top3: true }
-                } else if (item.important === 1 && item.top3 === 1) {
-                    return { ...item, important: true, top3: true }
+                    thing = { ...thing, important: true }
+                } if (item.top3 === 1) {
+                    thing = { ...thing, top3: true }
                 } else {
-                    return { ...item, important: false, top3: false }
+                    thing = { ...thing, important: false, top3: false }
                 }
+                return thing;
             })
             res.status(200).json(convertedList);
         })

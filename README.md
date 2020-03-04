@@ -113,25 +113,18 @@ Will return an array of values given a user's ID
 </br>
 
 **POST**: `/api/user/:id/values` </br>
-Will take in a single Values object and apply it to the user ID specified in the `:id` portion of the endpoint</br>
-
+User Values will be created on login</br>
+Default values:
 ```
 {
-    "value_id": int, (id of the Value)
-    "important": boolean, (if no value is included, db will default to false)
-    "comment": string || null
+    "user_id": (same as registered user),
+    "important": false,
+    "comment": null,
+    "value_id": (same as value being referred),
+    "top3": false
 }
 ```
 
-Will return:
-```
-{
-    "user_id": int,
-    "important": boolean,
-    "comment": string || null,
-    "value_id": int
-}
-```
 </br>
 
 **PUT**: `/api/user/:id/values` </br>
@@ -139,7 +132,8 @@ Will take in a single Values object and apply it to the user ID specified in the
 
 ```
 {
-    "value_id": int, (id of the Value)
+    "value_id": int, (id of the Value),
+    "top3": boolean, (if no value is included, db will default to false)
     "important": boolean, (if no value is included, db will default to false)
     "comment": string (optional/can be null)
 }
@@ -150,7 +144,8 @@ Will return:
     "user_id": int,
     "important": boolean,
     "comment": string || null,
-    "value_id": int
+    "value_id": int,
+    "top3": boolean
 }
 ```
 </br>
