@@ -12,7 +12,7 @@
   },
   "scripts": {
     "test": "cross-env DB_ENV=test jest --watch",
-    "server": "nodemon index.js",
+    "server": "cross-env NODE_ENV=development nodemon index.js",
     "start": "node index.js"
   },
   "keywords": [

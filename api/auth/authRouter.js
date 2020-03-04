@@ -2,9 +2,12 @@ const router = require('express').Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+// root directory needs a .env file with a key of SECRET for this function to work.
+const secret = process.env.SECRET;
 
 const User = require('../../models/authModel');
-
+const Values = require('../../models/valueModel');
+const DataValues = require('../../models/userDataModel');
 
 router.get('/', (req, res) => {
     res.send(`<h2>Auth Route is alive.</h2>`)
@@ -29,7 +32,8 @@ router.post('/register', (req, res) => {
         newUser.password = hash;
 
         User.addUser(newUser)
-            .then(saved => {
+            .then(async saved => {
+                await addValues(saved.id)
                 const token = getToken(saved);
                 res.status(201).json({
                     user: {
@@ -86,10 +90,35 @@ function getToken(user) {
         author: "Created by Jeffrey Orndorff"
     };
     const options = { expiresIn: "3h" };
-    // root directory needs a .env file with a key of SECRET for this function to work.
-    const token = jwt.sign(tokenPayload, process.env.SECRET, options);
+
+    const token = jwt.sign(tokenPayload, secret, options);
 
     return token;
+}
+
+function addValues(user_id) {
+    Values.getValues()
+        .then(res => {
+            console.log(res)
+            res.forEach(item => {
+                const insertValue = {
+                    user_id: user_id,
+                    value_id: item.id
+                }
+
+                DataValues.addUserValue(insertValue)
+                    .then(res => {
+                        return true;
+                    })
+                    .catch(err => {
+                        console.log(err)
+                        return false;
+                    })
+            })
+        })
+        .catch(err => {
+            res.status(500).json({ error: `Error getting values at register: ${err.message}` })
+        })
 }
 
 module.exports = router;

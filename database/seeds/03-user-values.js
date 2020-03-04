@@ -4,132 +4,158 @@ exports.seed = function (knex) {
             important: true,
             comment: "I love this value",
             value_id: 1,
-            user_id: 1
+            user_id: 1,
+            top3: true
         }, {
             important: false,
             comment: null,
             value_id: 2,
-            user_id: 1
+            user_id: 1,
+            top3: false
         }, {
             important: false,
             comment: null,
             value_id: 3,
-            user_id: 1
+            user_id: 1,
+            top3: false
         }, {
             important: false,
             comment: null,
             value_id: 4,
-            user_id: 1
+            user_id: 1,
+            top3: false
         }, {
             important: false,
             comment: null,
             value_id: 5,
-            user_id: 1
+            user_id: 1,
+            top3: false
         }, {
-            important: false,
+            important: true,
             comment: null,
             value_id: 6,
-            user_id: 1
+            user_id: 1,
+            top3: false
         }, {
             important: true,
             comment: "I mildly love this",
             value_id: 7,
-            user_id: 1
+            user_id: 1,
+            top3: true
         }, {
             important: false,
             comment: null,
             value_id: 8,
-            user_id: 1
+            user_id: 1,
+            top3: false
         }, {
             important: false,
             comment: null,
             value_id: 9,
-            user_id: 1
+            user_id: 1,
+            top3: false
         }, {
             important: true,
             comment: "This is very important to me",
             value_id: 10,
-            user_id: 1
+            user_id: 1,
+            top3: true
         }, {
             important: false,
             comment: null,
             value_id: 11,
-            user_id: 1
+            user_id: 1,
+            top3: false
         }, {
             important: false,
             comment: null,
             value_id: 12,
-            user_id: 1
+            user_id: 1,
+            top3: false
         }, {
             important: false,
             comment: null,
             value_id: 13,
-            user_id: 1
+            user_id: 1,
+            top3: false
         }, {
             important: true,
             comment: "I love this value",
             value_id: 1,
-            user_id: 2
+            user_id: 2,
+            top3: false
         }, {
             important: true,
             comment: "Someone tell me WHY this ISN'T IMPORTANT??",
             value_id: 2,
-            user_id: 2
+            user_id: 2,
+            top3: true
         }, {
             important: false,
             comment: null,
             value_id: 3,
-            user_id: 2
+            user_id: 2,
+            top3: false
         }, {
             important: false,
             comment: null,
             value_id: 4,
-            user_id: 2
+            user_id: 2,
+            top3: false
         }, {
             important: false,
             comment: null,
             value_id: 5,
-            user_id: 2
+            user_id: 2,
+            top3: false
         }, {
             important: false,
             comment: null,
             value_id: 6,
-            user_id: 2
+            user_id: 2,
+            top3: false
         }, {
             important: true,
             comment: "I mildly love this",
             value_id: 7,
-            user_id: 2
+            user_id: 2,
+            top3: true
         }, {
             important: false,
             comment: null,
             value_id: 8,
-            user_id: 2
+            user_id: 2,
+            top3: false
         }, {
             important: false,
             comment: null,
             value_id: 9,
-            user_id: 2
+            user_id: 2,
+            top3: false
         }, {
             important: false,
             comment: null,
             value_id: 10,
-            user_id: 2
+            user_id: 2,
+            top3: false
         }, {
             important: false,
             comment: null,
             value_id: 11,
-            user_id: 2
+            user_id: 2,
+            top3: false
         }, {
             important: true,
             comment: "This should be a priority",
             value_id: 12,
-            user_id: 2
+            user_id: 2,
+            top3: true
         }, {
             important: false,
             comment: null,
             value_id: 13,
-            user_id: 2
+            user_id: 2,
+            top3: false
         }
     ])
 }

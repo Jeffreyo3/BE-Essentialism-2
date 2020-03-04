@@ -8,6 +8,9 @@ exports.up = function (knex) {
             tbl.boolean('important')
                 .notNullable()
                 .defaultTo(false);
+            tbl.boolean('top3')
+                .notNullable()
+                .defaultTo(false);
             tbl.string('comment');
             tbl.integer('value_id')
                 .references('id')

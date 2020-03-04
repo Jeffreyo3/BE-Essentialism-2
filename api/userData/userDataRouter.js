@@ -8,44 +8,49 @@ router.get('/:id/values', (req, res) => {
     UserData.getUserValues(id)
         .then(list => {
             const convertedList = list.map(item => {
+                let thing = { ...item }
                 if (item.important === 1) {
-                    return { ...item, important: true }
+                    thing = { ...thing, important: true }
+                } if (item.top3 === 1) {
+                    thing = { ...thing, top3: true }
                 } else {
-                    return { ...item, important: false }
+                    thing = { ...thing, important: false, top3: false }
                 }
+                return thing;
             })
-            res.status(201).json(convertedList);
+            res.status(200).json(convertedList);
         })
         .catch(err => {
             res.status(500).json({ error: `Error attempting to get values: ${err.message}` })
         })
 })
 
-router.post('/:id/values', (req, res) => {
-    if (!req.body || !req.body.value_id) {
-        res.status(400).json({ message: "Please make sure to fill out all mandatory fields." });
-    } else {
+// router.post('/:id/values', (req, res) => {
+//     if (!req.body || !req.body.value_id) {
+//         res.status(400).json({ message: "Please make sure to fill out all mandatory fields." });
+//     } else {
 
-        const insertValue = {
-            user_id: req.params.id,
-            important: req.body.important === true ? 1 : 0,
-            comment: req.body.comment || null,
-            value_id: req.body.value_id
-        }
+//         const insertValue = {
+//             user_id: req.params.id,
+//             important: req.body.important === true ? 1 : 0,
+//             top3: req.body.top3 === true ? 1 : 0,
+//             comment: req.body.comment || null,
+//             value_id: req.body.value_id
+//         }
 
-        UserData.addUserValue(insertValue)
-            .then(value => {
-                res.status(201).json({ ...insertValue, important: insertValue.important === 1 ? true : false })
-            })
-            .catch(err => {
-                if (err.message.includes('UNIQUE constraint failed')) {
-                    res.status(500).json({ error: `This user has already selected this value. Please use update instead of submit.` })
-                } else {
-                    res.status(500).json({ error: `Error adding adding User's values: ${err.message}` })
-                }
-            })
-    }
-})
+//         UserData.addUserValue(insertValue)
+//             .then(value => {
+//                 res.status(201).json({ ...insertValue, important: insertValue.important === 1 ? true : false, top3: insertValue.top3 === 1 ? true : false })
+//             })
+//             .catch(err => {
+//                 if (err.message.includes('UNIQUE constraint failed')) {
+//                     res.status(500).json({ error: `This user has already selected this value. Please use update instead of submit.` })
+//                 } else {
+//                     res.status(500).json({ error: `Error adding adding User's values: ${err.message}` })
+//                 }
+//             })
+//     }
+// })
 
 router.put('/:id/values', (req, res) => {
     if (!req.body || !req.body.value_id) {
@@ -55,16 +60,17 @@ router.put('/:id/values', (req, res) => {
         const insertValue = {
             user_id: req.params.id,
             important: req.body.important === true ? 1 : 0,
+            top3: req.body.top3 === true ? 1 : 0,
             comment: req.body.comment || null,
             value_id: req.body.value_id
         }
 
         UserData.updateUserValue(insertValue, req.params.id, req.body.value_id)
             .then(value => {
-                res.status(200).json({ ...insertValue, important: insertValue.important === 1 ? true : false })
+                res.status(200).json({ ...insertValue, important: insertValue.important === 1 ? true : false, top3: insertValue.top3 === 1 ? true : false })
             })
             .catch(err => {
-                res.status(500).json({ error: `Error adding updating User's values: ${err}` })
+                res.status(500).json({ error: `Error updating User's values: ${err}` })
             })
     }
 })
@@ -105,7 +111,7 @@ router.post('/:id/projects', (req, res) => {
 
         UserData.addUserProject(insertProject)
             .then(project => {
-                console.log(project)
+                // console.log(project)
                 res.status(201).json({
                     user_id: project.user_id,
                     project: project.project,
@@ -154,17 +160,17 @@ router.put('/:id/projects/:project_id', (req, res) => {
 })
 
 router.delete('/projects/:project_id', (req, res) => {
-        const {project_id} = req.params
-        
-        UserData.removeUserProject(project_id)
-            .then(project => {
-                const deleteStatus = project === 1 ? "Successfully deleted project" : "Failed to delete project"
-                res.status(202).json(deleteStatus)
-            })
-            .catch(err => {
-                res.status(500).json({ error: `Error attempting to delete User's projects: ${err.message}` })
-            })
-    
+    const { project_id } = req.params
+
+    UserData.removeUserProject(project_id)
+        .then(project => {
+            const deleteStatus = project === 1 ? "Successfully deleted project" : "Failed to delete project"
+            res.status(202).json(deleteStatus)
+        })
+        .catch(err => {
+            res.status(500).json({ error: `Error attempting to delete User's projects: ${err.message}` })
+        })
+
 })
 
 module.exports = router;
