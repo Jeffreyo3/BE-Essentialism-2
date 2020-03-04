@@ -69,16 +69,16 @@ describe("userDataRouter GET at /:id/values", () => {
 //         expect(res.status).toBe(500);
 //     })
 
-    test("User values will return a 201 to successfully insert to user_values", async () => {
-        let res = await request(server)
-            .post('/api/user/0/values')
-            .set('Authorization', token)
-            .send({ value_id: 1 })
+//     test("User values will return a 201 to successfully insert to user_values", async () => {
+//         let res = await request(server)
+//             .post('/api/user/0/values')
+//             .set('Authorization', token)
+//             .send({ value_id: 1 })
 
-        expect(res.status).toBe(201);
-    })
+//         expect(res.status).toBe(201);
+//     })
 
-})
+// })
 
 describe("userDataRouter PUT at /:id/values", () => {
 
