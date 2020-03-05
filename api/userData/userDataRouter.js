@@ -8,15 +8,14 @@ router.get('/:id/values', (req, res) => {
     UserData.getUserValues(id)
         .then(list => {
             const convertedList = list.map(item => {
-                let thing = { ...item }
-                if (item.important === 1) {
-                    thing = { ...thing, important: true }
-                } if (item.top3 === 1) {
-                    thing = { ...thing, top3: true }
-                } else {
-                    thing = { ...thing, important: false, top3: false }
-                }
-                return thing;
+                return {
+                    id: item.id,
+                    value_id: item.value_id,
+                    value: item.value,
+                    important: !!+item.important,
+                    comment: item.comment,
+                    top3: !!+item.top3
+                };
             })
             res.status(200).json(convertedList);
         })
@@ -67,7 +66,13 @@ router.put('/:id/values', (req, res) => {
 
         UserData.updateUserValue(insertValue, req.params.id, req.body.value_id)
             .then(value => {
-                res.status(200).json({ ...insertValue, important: insertValue.important === 1 ? true : false, top3: insertValue.top3 === 1 ? true : false })
+                console.log(value)
+                res.status(200).json({
+                    ...insertValue,
+                    important: !!+insertValue.important,
+                    top3: !!+insertValue.top3,
+                    value: req.body.value || null
+                })
             })
             .catch(err => {
                 res.status(500).json({ error: `Error updating User's values: ${err}` })
