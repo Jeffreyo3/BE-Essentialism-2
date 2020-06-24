@@ -1,7 +1,7 @@
 # ESSENTIALISM API
 
 ## API Base URL
-`https://essentialism-be-api.herokuapp.com/`
+`https://essentialism-2-be.herokuapp.com/`
 
 #### Server Status
 **GET**: `/` </br>
